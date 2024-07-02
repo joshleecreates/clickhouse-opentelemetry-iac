@@ -1,11 +1,29 @@
+components:
+  frontendProxy:
+    service:
+      type: LoadBalancer
 grafana:
   plugins:
     - vertamedia-clickhouse-datasource
+    - grafana-opensearch-datasource
+  datasources:
+    datasources-altinity.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Altinity
+          uid: webstore-altinity
+          type: vertamedia-clickhouse-datasource
+          url: "http://${clickhouse_url}:8123"
+          editable: true
+          isDefault: false
+          basicAuth: true
+          basicAuthUser: ${clickhouse_username}
+          basicAuthPassword: ${clickhouse_password}
 opentelemetry-collector:
   config:
     exporters:
       clickhouse:
-        endpoint: "clickhouse://${clickhouse_url}:9000"
+        endpoint: "http://${clickhouse_url}:8123"
         database: otel
         username: ${clickhouse_username}
         password: ${clickhouse_password}
