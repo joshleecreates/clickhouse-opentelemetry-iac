@@ -2,6 +2,10 @@ components:
   frontendProxy:
     service:
       type: LoadBalancer
+  accountingService:
+    resources:
+      limits:
+        memory: 150Mi
 grafana:
   plugins:
     - vertamedia-clickhouse-datasource
