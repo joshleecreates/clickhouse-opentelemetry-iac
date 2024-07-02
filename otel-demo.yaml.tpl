@@ -1,12 +1,14 @@
+grafana:
+  plugins:
+    - vertamedia-clickhouse-datasource
 opentelemetry-collector:
   config:
     exporters:
       clickhouse:
-        endpoint: "clickhouse://${clickhouse_url}"
+        endpoint: "clickhouse://${clickhouse_url}:9000"
         database: otel
         username: ${clickhouse_username}
         password: ${clickhouse_password}
-        create_schema: true
         logs_table_name: otel_logs
         traces_table_name: otel_traces
         metrics_table_name: otel_metrics

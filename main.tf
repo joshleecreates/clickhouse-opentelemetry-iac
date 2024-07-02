@@ -1,5 +1,6 @@
 locals {
   region = "us-east-2"
+  eks_cluster_name = "opentelemetry-demo-cluster"
 }
 
 provider "aws" {
@@ -15,7 +16,7 @@ module "eks_clickhouse" {
 
   clickhouse_cluster_enable_loadbalancer = true
 
-  eks_cluster_name = "opentelemetry-demo-cluster"
+  eks_cluster_name = local.eks_cluster_name
   eks_region       = local.region
   eks_cidr         = "10.0.0.0/16"
 
