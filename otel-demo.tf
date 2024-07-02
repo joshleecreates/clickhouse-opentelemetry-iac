@@ -1,3 +1,15 @@
+provider "kubernetes" {
+  host                   = module.eks_clickhouse.eks_cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks_clickhouse.eks_cluster_ca_certificate)
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = module.eks_clickhouse.eks_cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks_clickhouse.eks_cluster_ca_certificate)
+  }
+}
+
 resource "helm_release" "otel-demo" {
   name       = "clickhouse-opentelemetry-demo"
   repository = "https://open-telemetry.github.io/opentelemetry-helm-charts"
