@@ -25,7 +25,8 @@ opentelemetry-collector:
       clickhouse:
         endpoint: "http://${clickhouse_url}:8123"
         database: otel
-        cluster_name: "'all-replicated'"
+        create_schema: true
+        cluster_name: "dev"
         username: ${clickhouse_username}
         password: ${clickhouse_password}
         logs_table_name: otel_logs
