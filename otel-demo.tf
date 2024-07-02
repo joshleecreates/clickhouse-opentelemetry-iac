@@ -13,14 +13,15 @@ provider "helm" {
 
 resource "helm_release" "otel-demo" {
   name       = "clickhouse-opentelemetry-demo"
-  repository = "https://open-telemetry.github.io/opentelemetry-helm-charts"
+  repository = "https://joshleecreates.github.io/my-helm-charts"
   chart      = "opentelemetry-demo"
-  version    = "0.28.3"
+  version    = "0.32.0"
   values = [
     templatefile("${path.module}/otel-demo.yaml.tpl", {
       clickhouse_url = module.eks_clickhouse.clickhouse_cluster_url
       clickhouse_username = "test"
       clickhouse_password = module.eks_clickhouse.clickhouse_cluster_password
+      clickhouse_cluster_name = "opentelemetry-demo-cluster"
     })
   ]
 }
