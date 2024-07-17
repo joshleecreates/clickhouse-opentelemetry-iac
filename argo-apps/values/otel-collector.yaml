@@ -11,7 +11,7 @@ presets:
   # Enables the filelogreceiver and adds it to the logs pipelines
   logsCollection:
     enabled: true
-config: |
+config:
   exporters:
     clickhouse:
       endpoint: clickhouse://clickhouse-eks.clickhouse.svc.cluster.local:9000?dial_timeout=10s&compress=lz4
