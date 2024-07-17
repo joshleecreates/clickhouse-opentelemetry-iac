@@ -15,7 +15,7 @@ spec:
     repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts/
     targetRevision: 0.97.1
     helm:
-      valueFiles:
+      valuesFiles:
         - values.yaml
   syncPolicy:
     automated:
