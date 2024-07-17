@@ -48,7 +48,7 @@ module "eks_clickhouse" {
     {
       name          = "system"
       instance_type = "t3.large"
-      desired_size  = 2
+      desired_size  = 1
       max_size      = 10
       min_size      = 0
       zones         = ["${local.region}a"]
