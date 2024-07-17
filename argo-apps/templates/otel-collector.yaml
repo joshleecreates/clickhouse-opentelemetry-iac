@@ -16,7 +16,7 @@ spec:
     targetRevision: 0.97.1
     helm:
       valuesFiles:
-        - values.yaml
+        - ../values/otel-collector.yaml
   syncPolicy:
     automated:
       selfHeal: true
