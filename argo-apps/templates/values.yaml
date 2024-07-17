@@ -1,6 +1,5 @@
 image:
   repository: "otel/opentelemetry-collector-contrib"
-enabled: true
 mode: deployment
 presets:
   kubernetesAttributes:
