@@ -1,16 +1,13 @@
 image:
-  repository: "otel/opentelemetry-collector-contrib"
-mode: deployment
+  repository: otel/opentelemetry-collector-k8s
+mode: daemonset
 presets:
+  # enables the k8sattributesprocessor and adds it to the traces, metrics, and logs pipelines
   kubernetesAttributes:
     enabled: true
-service:
-  type: ClusterIP
-ports:
-  metrics:
+  # enables the kubeletstatsreceiver and adds it to the metrics pipelines
+  kubeletMetrics:
     enabled: true
-  prometheus:
+  # Enables the filelogreceiver and adds it to the logs pipelines
+  logsCollection:
     enabled: true
-    containerPort: 9464
-    servicePort: 9464
-    protocol: TCP
