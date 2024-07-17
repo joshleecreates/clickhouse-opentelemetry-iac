@@ -14,7 +14,7 @@ presets:
   logsCollection:
     enabled: true
 
-env:
+extraEnvs:
   - name: CLICKHOUSE_USERNAME
     valueFrom:
       secretKeyRef:
