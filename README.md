@@ -17,3 +17,11 @@ argocd app create apps \
 ```
 kubectl get secret clickhouse-credentials --namespace=clickhouse -oyaml | grep -v '^\s*namespace:\s' | kubectl apply --namespace=default -f -
 ```
+
+# Grafana
+1. Create secret 'grafana-admin'
+```
+kubectl create secret generic grafana-admin \
+  --from-literal=admin-user=YWRtaW4= \
+  --from-literal=admin-password=cGFzc3dvcmQ=
+```
