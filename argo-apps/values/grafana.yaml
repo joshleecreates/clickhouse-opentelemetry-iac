@@ -10,8 +10,11 @@ env:
         name: clickhouse-credentials
         key: password
           
+adminPassword: admin
+
 plugins:
   - grafana-clickhouse-datasource
+
 datasources:
   datasources.yaml:
     apiVersion: 1
