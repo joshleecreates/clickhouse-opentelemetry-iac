@@ -9,6 +9,8 @@ env:
       secretKeyRef:
         name: clickhouse-credentials
         key: password
+admin:
+  existingSecret: grafana-admin
 
 plugins:
   - grafana-clickhouse-datasource
