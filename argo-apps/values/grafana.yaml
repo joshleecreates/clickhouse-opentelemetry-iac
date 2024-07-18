@@ -7,18 +7,38 @@ persistence:
   size: 5Gi
 plugins:
   - grafana-clickhouse-datasource
+  - vertamedia-clickhouse-datasource
 datasources:
   datasources.yaml:
     apiVersion: 1
     datasources:
-    - name: ClickHouse
+    - name: ClickHouse-Grafana
       uid: clusterclickhouse
       type: grafana-clickhouse-datasource
       jsonData:
         defaultDatabase: otel
         port: 9000
         host: a2b40a62cc1f94318b628c7838f3c168-277682861.us-east-2.elb.amazonaws.com
-        username: test
+        username: '$CLICKHOUSE_USER'
+        tlsSkipVerify: true
+        logs:
+          otelEnabled: true
+          defaultDatabase: otel
+          defaultTable: otel_logs
+        traces:
+          otelEnabled: true
+          defaultDatabase: otel
+          defaultTable: otel_traces
+      secureJsonData:
+        password: '$CLICKHOUSE_PASSWORD'
+    - name: ClickHouse-Altinity
+      uid: clickhouse-altinity
+      type: vertamedia-clickhouse-datasource
+      host: a2b40a62cc1f94318b628c7838f3c168-277682861.us-east-2.elb.amazonaws.com
+      jsonData:
+        defaultDatabase: otel
+        port: 9000
+        username: '$CLICKHOUSE_USER'
         tlsSkipVerify: true
       secureJsonData:
         password: '$CLICKHOUSE_PASSWORD'
