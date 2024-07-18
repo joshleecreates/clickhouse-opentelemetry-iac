@@ -8,13 +8,13 @@ datasources:
     apiVersion: 1
     datasources:
     - name: ClickHouse
-      uid: cluster-clickhouse
+      uid: clusterclickhouse
       type: grafana-clickhouse-datasource
       jsonData:
         defaultDatabase: otel
         port: 9000
         host: a2b40a62cc1f94318b628c7838f3c168-277682861.us-east-2.elb.amazonaws.com
-        username: '${env:CLICKHOUSE_USERNAME}'
+        username: '$CLICKHOUSE_USERNAME'
         tlsSkipVerify: true
       secureJsonData:
-        password: '${env:CLICKHOUSE_PASSWORD}'
+        password: '$CLICKHOUSE_PASSWORD'
