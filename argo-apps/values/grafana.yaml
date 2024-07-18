@@ -11,10 +11,10 @@ datasources:
       uid: cluster-clickhouse
       type: grafana-clickhouse-datasource
       jsonData:
-        defaultDatabase: database
+        defaultDatabase: otel
         port: 9000
         host: clickhouse-eks.clickhouse.svc.cluster.local
         username: '${env:CLICKHOUSE_USERNAME}'
-        tlsSkipVerify: false
+        tlsSkipVerify: true
       secureJsonData:
         password: '${env:CLICKHOUSE_PASSWORD}'
