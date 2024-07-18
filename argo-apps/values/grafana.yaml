@@ -4,14 +4,17 @@ admin:
 plugins:
   - grafana-clickhouse-datasource
 datasources:
-  - name: ClickHouse
-    uid: cluster-clickhouse
-    type: clickhouse
-    jsonData:
-      defaultDatabase: database
-      port: 9000
-      host: clickhouse-eks.clickhouse.svc.cluster.local
-      username: '${env:CLICKHOUSE_USERNAME}'
-      tlsSkipVerify: false
-    secureJsonData:
-      password: '${env:CLICKHOUSE_PASSWORD}'
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: ClickHouse
+      uid: cluster-clickhouse
+      type: clickhouse
+      jsonData:
+        defaultDatabase: database
+        port: 9000
+        host: clickhouse-eks.clickhouse.svc.cluster.local
+        username: '${env:CLICKHOUSE_USERNAME}'
+        tlsSkipVerify: false
+      secureJsonData:
+        password: '${env:CLICKHOUSE_PASSWORD}'
