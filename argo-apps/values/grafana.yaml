@@ -1,21 +1,8 @@
-env:
-  - name: CLICKHOUSE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: clickhouse-credentials
-        key: user
-  - name: CLICKHOUSE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: clickhouse-credentials
-        key: password
-
+envFromSecret: grafana-env-secret
 admin:
   existingSecret: grafana-admin
-
 plugins:
   - grafana-clickhouse-datasource
-
 datasources:
   - name: ClickHouse
     uid: cluster-clickhouse
