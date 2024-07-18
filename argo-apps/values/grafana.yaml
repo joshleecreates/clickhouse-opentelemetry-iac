@@ -1,10 +1,10 @@
 envFromSecret: grafana-env-secret
 admin:
   existingSecret: grafana-admin
-persistence:
-  type: pvc
-  enabled: true
-  size: 5Gi
+# persistence:
+#   type: pvc
+#   enabled: true
+#   size: 5Gi
 plugins:
   - grafana-clickhouse-datasource
   - vertamedia-clickhouse-datasource
