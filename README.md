@@ -25,3 +25,4 @@ kubectl create secret generic grafana-admin \
   --from-literal=admin-user=YWRtaW4= \
   --from-literal=admin-password=cGFzc3dvcmQ=
 ```
+2. Create secrete 'grafana-env-secret'
