@@ -9,7 +9,7 @@ datasources:
     datasources:
     - name: ClickHouse
       uid: cluster-clickhouse
-      type: clickhouse
+      type: grafana-clickhouse-datasource
       jsonData:
         defaultDatabase: database
         port: 9000
