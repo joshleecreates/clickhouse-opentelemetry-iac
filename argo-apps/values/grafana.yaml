@@ -1,10 +1,10 @@
 envFromSecret: grafana-env-secret
 admin:
   existingSecret: grafana-admin
-# persistence:
-#   type: pvc
-#   enabled: true
-#   size: 5Gi
+persistence:
+  type: pvc
+  enabled: true
+  size: 5Gi
 plugins:
   - grafana-clickhouse-datasource
   - vertamedia-clickhouse-datasource
@@ -36,7 +36,7 @@ datasources:
       editable: true
       access: proxy
       type: vertamedia-clickhouse-datasource
-      url: clickhouse://a2b40a62cc1f94318b628c7838f3c168-277682861.us-east-2.elb.amazonaws.com:9000
+      url: http://a2b40a62cc1f94318b628c7838f3c168-277682861.us-east-2.elb.amazonaws.com:8123
       jsonData:
         defaultDatabase: otel
         addCorsHeader: true
@@ -45,6 +45,6 @@ datasources:
         useYandexCloudAuthorization: true
         xHeaderUser: '$CLICKHOUSE_USER'
         tlsSkipVerify: true
-        dataSourceUrl: clickhouse://a2b40a62cc1f94318b628c7838f3c168-277682861.us-east-2.elb.amazonaws.com:9000
+        dataSourceUrl: http://a2b40a62cc1f94318b628c7838f3c168-277682861.us-east-2.elb.amazonaws.com:8123
       secureJsonData:
         xHeaderKey: '$CLICKHOUSE_PASSWORD'
