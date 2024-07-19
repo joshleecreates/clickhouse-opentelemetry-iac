@@ -34,11 +34,15 @@ datasources:
     - name: ClickHouse-Altinity
       uid: clickhouse-altinity
       type: vertamedia-clickhouse-datasource
-      host: a2b40a62cc1f94318b628c7838f3c168-277682861.us-east-2.elb.amazonaws.com
+      url: clickhouse://a2b40a62cc1f94318b628c7838f3c168-277682861.us-east-2.elb.amazonaws.com:9000
       jsonData:
         defaultDatabase: otel
-        port: 9000
-        username: '$CLICKHOUSE_USER'
+        addCorsHeader: true
+        serverName: "clickhouse"
+        usePOST: true
+        useYandexCloudAuthorization: true
+        xHeaderUser: '$CLICKHOUSE_USER'
         tlsSkipVerify: true
+        dataSourceUrl: clickhouse://a2b40a62cc1f94318b628c7838f3c168-277682861.us-east-2.elb.amazonaws.com:9000
       secureJsonData:
-        password: '$CLICKHOUSE_PASSWORD'
+        xHeaderKey: '$CLICKHOUSE_PASSWORD'
