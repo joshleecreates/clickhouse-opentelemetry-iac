@@ -33,6 +33,8 @@ datasources:
         password: '$CLICKHOUSE_PASSWORD'
     - name: ClickHouse-Altinity
       uid: clickhouse-altinity
+      editable: true
+      access: proxy
       type: vertamedia-clickhouse-datasource
       url: clickhouse://a2b40a62cc1f94318b628c7838f3c168-277682861.us-east-2.elb.amazonaws.com:9000
       jsonData:
