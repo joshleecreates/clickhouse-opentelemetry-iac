@@ -1,4 +1,0 @@
-- [ ] Add ArgoCD
-- [ ] Add Ingress
-- [ ] Create App-of-Apps Repo
-- [ ] Provision Grafana via Helm
