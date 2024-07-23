@@ -8,6 +8,8 @@ persistence:
 plugins:
   - grafana-clickhouse-datasource
   - vertamedia-clickhouse-datasource
+service:
+  type: LoadBalancer
 datasources:
   datasources.yaml:
     apiVersion: 1
