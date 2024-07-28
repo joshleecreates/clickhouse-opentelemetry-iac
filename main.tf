@@ -1,6 +1,6 @@
 locals {
   region = "us-east-2"
-  eks_cluster_name = "opentelemetry-demo-cluster"
+  eks_cluster_name = "josh-dev"
 }
 
 provider "aws" {
@@ -11,10 +11,10 @@ provider "aws" {
 module "eks_clickhouse" {
   source  = "github.com/Altinity/terraform-aws-eks-clickhouse"
 
-  install_clickhouse_operator = true
-  install_clickhouse_cluster  = true
+  install_clickhouse_operator = false
+  install_clickhouse_cluster  = false
 
-  clickhouse_cluster_enable_loadbalancer = true
+  clickhouse_cluster_enable_loadbalancer = false
 
   eks_cluster_name = local.eks_cluster_name
   eks_region       = local.region
@@ -64,11 +64,11 @@ output "eks_configure_kubectl" {
   value = module.eks_clickhouse.eks_configure_kubectl
 }
 
-output "clickhouse_cluster_url" {
-  value = module.eks_clickhouse.clickhouse_cluster_url
-}
-
-output "clickhouse_cluster_password" {
-  value     = module.eks_clickhouse.clickhouse_cluster_password
-  sensitive = true
-}
+# output "clickhouse_cluster_url" {
+#   value = module.eks_clickhouse.clickhouse_cluster_url
+# }
+#
+# output "clickhouse_cluster_password" {
+#   value     = module.eks_clickhouse.clickhouse_cluster_password
+#   sensitive = true
+# }
