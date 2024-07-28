@@ -13,7 +13,7 @@ spec:
   sources:
     - chart: clickhouse-operator
       repoURL: https://altinity.github.io/clickhouse-operator
-      targetRevision: 0.23.6
+      targetRevision: 0.23.4
       helm:
         valueFiles:
           - $values/argo-apps/values/clickhouse.yaml
