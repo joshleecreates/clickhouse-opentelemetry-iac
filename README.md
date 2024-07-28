@@ -43,11 +43,19 @@ argocd app create apps \
   --path argo-apps
 ```
 
+```
+argocd app sync argocd/apps
+```
+
 We can use this command to get the ArgoCD admin password and watch our apps deploy:
 
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
+
+- get argocd server URL
+- configure argocd cli tool with kubernetes API access
+- port forwarding
 
 ## Create Secrets
 
