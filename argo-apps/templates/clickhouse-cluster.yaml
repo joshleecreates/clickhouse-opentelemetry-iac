@@ -16,7 +16,7 @@ spec:
       targetRevision: 0.1.2
       helm:
         valueFiles:
-          - $values/argo-apps/values/keeper-cluster.yaml
+          - $values/argo-apps/values/clickhouse-cluster.yaml
     - repoURL: 'https://github.com/joshleecreates/clickhouse-opentelemetry-iac.git'
       targetRevision: main
       ref: values
