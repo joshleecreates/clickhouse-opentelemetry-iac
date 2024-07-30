@@ -16,4 +16,4 @@ clickhouse-eks:
     storage_class_name: gp3-encrypted
     password: password
     user: test
-    keeper_name: keeper
+    keeper_name: keeper-keeper
