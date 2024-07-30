@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: clickhouse-cluster
+  name: clickhouse
   namespace: argocd
   annotations: 
     argocd.argoproj.io/sync-wave: "1"
@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: clickhouse-cluster
+    path: clickhouse
     repoURL: {{ .Values.spec.destination.server }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
   syncPolicy:
