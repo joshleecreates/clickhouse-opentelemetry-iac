@@ -1,4 +1,4 @@
-keeper:
+keeper-sts:
   all:
     metadata:
       labels:
@@ -13,7 +13,7 @@ keeper:
       - us-west-2c
     node_selector: m6i.large
 
-clickhouse-cluster:
+clickhouse-eks:
   all:
     metadata:
       labels:
