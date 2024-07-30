@@ -1,5 +1,5 @@
 locals {
-  region = "us-east-2"
+  region = "us-west-2"
   eks_cluster_name = "josh-dev"
 }
 
@@ -63,12 +63,3 @@ module "eks_clickhouse" {
 output "eks_configure_kubectl" {
   value = module.eks_clickhouse.eks_configure_kubectl
 }
-
-# output "clickhouse_cluster_url" {
-#   value = module.eks_clickhouse.clickhouse_cluster_url
-# }
-#
-# output "clickhouse_cluster_password" {
-#   value     = module.eks_clickhouse.clickhouse_cluster_password
-#   sensitive = true
-# }

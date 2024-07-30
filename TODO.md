@@ -1,4 +1,0 @@
-- [ ] Create Keeper Values & App
-- [ ] Create ClickHouse Cluster Values
-- [ ] Make Grafana and OTel Collector dependent apps
-- [ ] Set up Ingress as a core app

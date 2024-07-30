@@ -1,21 +1,41 @@
 # Clreate an EKS Cluster with ClickHouse
 
-The `main.tf` uses the [Altinity EKS Terraform Module for ClickHouse](https://github.com/Altinity/terraform-aws-eks-clickhouse) to 
-create an EKS Cluster with 2 nodegroups. The module uses the Terraform Helm Provider
-to deploy the Altinity Operator for ClickHouse, ClickHouse Keeper, and a ClickHouse cluster.
+## Install Infrastructure
 
-In `argocd.tf` we had a basic definition for ArgoCD.
-
-AWS Load Balancers are created for both the ClickHouse Cluster and ArgoCD.
-
-The default ClickHouse cluster name is `dev`.
-
-You can use either OpenTofu or Terraform to run these commands:
+In the `infrastructure` directory:
 
 1. `tofu init` / `terraform init`
 2. `tofu apply`
 
-This will take a few minutes.
+This will take a few minutes to create an EKS cluster with two node groups.
+
+Once this completes, you will see a command to configure your local kubectl with
+the cluster context. If you need this command again you can fetch it with: `tofu output`
+
+## Bootstrap ArgoCD
+
+In the `bootstrap` directory, run `terraform init` and `terraform apply`. This will
+use the terraform helm provider to create an ArgoCD release.
+
+The terraform outputs include the ArgoCD LoadBalancer URL and the initial admin password.
+
+You can see the unredacted password with `tofu outputs -json`.
+
+### Configuring the ArgoCD CLI
+
+If you'd like to use the ArgoCD CLI instead of the UI, you can configure it with the 
+command `argocd login --core` (assuming your kube context is still active).
+
+Before using the CLI, you may wish to set your default namespace to `argocd`:
+
+```
+kubectl config set-context --current --namespace=argocd
+```
+
+
+
+
+---
 
 Once the cluster has been created, you can fetch the admin password using this command:
 
