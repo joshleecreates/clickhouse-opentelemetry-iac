@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     path: clickhouse
-    repoURL: {{ .Values.spec.destination.server }}
+    repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
   syncPolicy:
     automated:
