@@ -9,9 +9,9 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: altinity-clickhouse-operator
+    chart: altinity-clickhouse-operator
     repoURL: https://altinity.github.io/clickhouse-operator
-    targetRevision: "0.23.6"
+    targetRevision: 0.23.6
   syncPolicy:
     automated:
       selfHeal: true
