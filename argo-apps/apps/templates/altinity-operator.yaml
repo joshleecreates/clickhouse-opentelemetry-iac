@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: clickhouse
+  name: altinity-operator
   namespace: argocd
 spec:
   destination:
-    namespace: clickhouse
+    namespace: kube-system
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: argo-apps/clickhouse
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    path: clickhouse-operator
+    repoURL: https://altinity.github.io/clickhouse-operator
+    targetRevision: "0.23.6"
   syncPolicy:
     automated:
       selfHeal: true
