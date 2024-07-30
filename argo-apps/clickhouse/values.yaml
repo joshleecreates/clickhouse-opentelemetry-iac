@@ -1,18 +1,3 @@
-keeper-sts:
-  all:
-    metadata:
-      labels:
-        application_group: eks
-
-  keeper:
-    name: eks
-    cluster: chk
-    zones:
-      - us-west-2a
-      - us-west-2b
-      - us-west-2c
-    node_selector: m6i.large
-
 clickhouse-eks:
   all:
     metadata:
@@ -31,4 +16,4 @@ clickhouse-eks:
     storage_class_name: gp3-encrypted
     password: password
     user: test
-    keeper_name: keeper-eks
+    keeper_name: keeper
