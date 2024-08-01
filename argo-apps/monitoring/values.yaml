@@ -67,8 +67,10 @@ collector:
           exporters: [clickhouse]
 
 
+####################################################
+#### Grafana #######################################
+####################################################
 grafana:
-  envFromSecret: grafana-env-secret
   admin:
     existingSecret: grafana-admin
   persistence:
