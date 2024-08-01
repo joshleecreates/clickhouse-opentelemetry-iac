@@ -11,7 +11,7 @@ dependencies:
 #   repo: https://prometheus-community.github.io/helm-charts
 - name: grafana
   version: "8.4.0"
-  repo: https://grafana.github.io/helm-charts
+  repository: https://grafana.github.io/helm-charts
 - name: keeper-sts
   version: "0.1.1"
   repository:  https://altinity.github.io/kubernetes-blueprints-for-clickhouse
