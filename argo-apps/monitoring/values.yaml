@@ -17,8 +17,6 @@ clickhouse-eks:
     node_selector: "m6i.large"
     service_type: "ClusterIP"
     storage_class_name: gp3-encrypted
-    password: password
-    user: test
     keeper_name: keeper-keeper
 
 ####################################################

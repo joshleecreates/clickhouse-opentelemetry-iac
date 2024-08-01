@@ -29,19 +29,46 @@ command `argocd login --core` (assuming your kube context is still active).
 Before using the CLI, you may wish to set your default namespace to `argocd`:
 
 ```
-kubectl config set-context --current --namespace=argocd
+$ kubectl config set-context --current --namespace=argocd
 ```
 
+To use our Kubernetes context to log in to ArgoCD:
+```
+argocd login --core
+```
 
+To deploy our initial app-of-apps:
+```
+argocd app create apps \
+  --dest-namespace argocd \
+  --dest-server https://kubernetes.default.svc \
+  --repo https://github.com/joshleecreates/clickhouse-opentelemetry-iac.git \
+  --path argo-apps/apps
+```
 
+```
+argocd app sync argocd/apps
+```
+
+## Create a Read-Only User for Grafana
+
+```
+kubectl -n monitoring exec -it chi-clickhouse-monitoring-0-0-0 -- clickhouse-client --user=test --password=password
+```
+
+```
+) CREATE USER 'grafana' HOST IP '10.0.0.0/8', '127.0.0.1/32' IDENTIFIED BY 'grafana'
+```
+
+Connect to Grafana:
+```
+kubectl port-forward -n monitoring services/monitoring-grafana 3000:80
+```
 
 ---
 
 Once the cluster has been created, you can fetch the admin password using this command:
 
-```
-kubectl get secret clickhouse-credentials --namespace=clickhouse -oyaml | grep -v '^\s*namespace:\s' | kubectl apply --namespace=default -f -
-```
 
 And you can get the ingress address with:
 
