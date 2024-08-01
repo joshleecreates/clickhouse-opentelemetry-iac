@@ -16,3 +16,11 @@ spec:
     automated:
       selfHeal: true
       prune: true
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    kubernetes.io/metadata.name: coroot
+  name: coroot
