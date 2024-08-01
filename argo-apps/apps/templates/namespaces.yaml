@@ -4,3 +4,17 @@ metadata:
   labels:
     kubernetes.io/metadata.name: clickhouse
   name: clickhouse
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    kubernetes.io/metadata.name: coroot
+  name: coroot
+
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   labels:
+#     kubernetes.io/metadata.name: monitoring
+#   name: monitoring
