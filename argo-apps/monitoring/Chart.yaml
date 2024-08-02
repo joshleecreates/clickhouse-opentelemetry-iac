@@ -12,9 +12,3 @@ dependencies:
 - name: grafana
   version: "8.4.0"
   repository: https://grafana.github.io/helm-charts
-- name: keeper-sts
-  version: "0.1.1"
-  repository:  https://altinity.github.io/kubernetes-blueprints-for-clickhouse
-- name: clickhouse-eks
-  version: "0.1.2"
-  repository:  https://altinity.github.io/kubernetes-blueprints-for-clickhouse

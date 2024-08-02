@@ -1,8 +1,6 @@
 ####################################################
 #### ClickHouse ####################################
 ####################################################
-clickhouse:
-  keeper_name: keeper-keeper
 
 # clickhouse-eks:
 #   all:
@@ -57,7 +55,7 @@ opentelemetry-collector:
   config:
     exporters:
       clickhouse:
-        endpoint: clickhouse://clickhouse-clickhouse:9000?dial_timeout=10s&compress=lz4
+        endpoint: clickhouse://clickhouse-monitoringdb:9000?dial_timeout=10s&compress=lz4
         database: otel
         # username: '${env:CLICKHOUSE_USERNAME}'
         # password: '${env:CLICKHOUSE_PASSWORD}'
