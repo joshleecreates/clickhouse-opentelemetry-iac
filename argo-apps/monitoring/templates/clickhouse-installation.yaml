@@ -1,0 +1,15 @@
+# ClickHouse using default storage class.
+apiVersion: "clickhouse.altinity.com/v1"
+kind: "ClickHouseInstallation"
+metadata:
+  name: "monitoringdb"
+  labels:
+    application_group: "monitoring"
+spec:
+  configuration:
+    clusters:
+      - name: "monitoring"
+    zookeeper:
+        nodes:
+        - host: "{{ .Values.clickhouse.keeper_name }}"
+          port: 2181
