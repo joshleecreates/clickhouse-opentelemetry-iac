@@ -9,7 +9,3 @@ spec:
   configuration:
     clusters:
       - name: "monitoring"
-    zookeeper:
-        nodes:
-        - host: "{{ .Values.clickhouse.keeper_name }}"
-          port: 2181
