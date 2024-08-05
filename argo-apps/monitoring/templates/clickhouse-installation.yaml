@@ -11,6 +11,8 @@ spec:
       collector/networks/ip: 10.0.0.0/8
       collector/password: collector
       collector/profile: default
+      collector/grants:
+        - "GRANT SELECT ON otel.*"
       grafana/networks/ip: 10.0.0.0/8
       grafana/password: grafana
       grafana/profile: readonly
