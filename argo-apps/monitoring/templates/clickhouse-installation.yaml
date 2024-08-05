@@ -69,7 +69,7 @@ spec:
     podTemplates:
       - name: pod-template
         spec:
-          container:
+          containers:
             - name: clickhouse
               image: clickhouse/clickhouse-server:latest
               env:
