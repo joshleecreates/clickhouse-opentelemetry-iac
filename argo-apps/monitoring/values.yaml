@@ -1,28 +1,5 @@
 ####################################################
-#### ClickHouse ####################################
-####################################################
-
-# clickhouse-eks:
-#   all:
-#     metadata:
-#       labels:
-#         application_group: monitoring
-#
-#   clickhouse:
-#     name: clickhouse
-#     cluster: monitoring 
-#     zones:
-#       - us-west-2a
-#       - us-west-2b
-#       - us-west-2c
-#     node_selector: "m6i.large"
-#     service_type: "ClusterIP"
-#     storage_class_name: gp3-encrypted
-#     keeper_name: keeper-keeper
-#
-  
-####################################################
-#### OpenTelemetry Collector #######################
+# OpenTelemetry Collector
 ####################################################
 opentelemetry-collector:
   image:
@@ -79,7 +56,7 @@ opentelemetry-collector:
 
 
 ####################################################
-#### Grafana #######################################
+# Grafana
 ####################################################
 grafana:
   grafana.ini:
