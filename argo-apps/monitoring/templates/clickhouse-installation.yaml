@@ -15,6 +15,7 @@ data:
     clickhouse client -n <<-EOSQL
       CREATE USER IF NOT EXISTS collector IDENTIFIED BY 'collector' HOST IP '10.0.0.0/8';
       GRANT SELECT, INSERT, UPDATE, DROP, DELETE, ALTER, CREATE ON otel.* TO collector;
+      GRANT CREATE DATABASE ON *.* TO collector;
     EOSQL
 ---
 apiVersion: "clickhouse.altinity.com/v1"
