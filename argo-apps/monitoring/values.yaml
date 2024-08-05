@@ -93,9 +93,8 @@ grafana:
       enabled: true
       org_name: Main Org.
       org_role: Admin
-    # server:
-    #   root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana"
-    #   serve_from_sub_path: true
+    server:
+      root_url: "%(protocol)s://%(domain)s:%(http_port)s/"
   adminPassword: admin
   # persistence:
   #   type: pvc
