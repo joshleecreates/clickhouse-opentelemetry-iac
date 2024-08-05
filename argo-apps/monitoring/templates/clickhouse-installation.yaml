@@ -16,6 +16,7 @@ spec:
       grafana/profile: readonly
       grafana/grants/query:
         - "GRANT SELECT ON otel.*"
+        - "GRANT SETTING max_execution_time"
     profiles:
       readonly/readonly: 1
     clusters:
