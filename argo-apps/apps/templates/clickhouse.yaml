@@ -1,26 +1,26 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: clickhouse
-  namespace: argocd
-spec:
-  destination:
-    namespace: clickhouse
-    server: https://kubernetes.default.svc
-  project: default
-  source:
-    path: argo-apps/clickhouse
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
-  syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
-
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  labels:
-    kubernetes.io/metadata.name: clickhouse
-  name: clickhouse
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: clickhouse
+#   namespace: argocd
+# spec:
+#   destination:
+#     namespace: clickhouse
+#     server: https://kubernetes.default.svc
+#   project: default
+#   source:
+#     path: argo-apps/clickhouse
+#     repoURL: {{ .Values.spec.source.repoURL }}
+#     targetRevision: {{ .Values.spec.source.targetRevision }}
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
+#       prune: true
+#
+# ---
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   labels:
+#     kubernetes.io/metadata.name: clickhouse
+#   name: clickhouse
