@@ -59,22 +59,22 @@ spec:
       readonly/readonly: 1
     clusters:
       - name: "monitoring"
+    users:
+      collector/networks/ip: 10.0.0.0/8
+      collector/password: collector
+      collector/profile: default
+      collector/grants:
+        - "GRANT SELECT,INSERT,ALTER,CREATE,DROP,SHOW ON otel.*"
+      grafana/networks/ip: 10.0.0.0/8
+      grafana/password: grafana
+      grafana/profile: readonly
+      # grafana/grants/query:
+      #   - "GRANT SETTING max_execution_time TO USER grafana"
   defaults:
     templates:
       podTemplate: pod-template
       dataVolumeClaimTemplate: default-volume-claim
       logVolumeClaimTemplate: default-volume-claim
-  users:
-    collector/networks/ip: 10.0.0.0/8
-    collector/password: collector
-    collector/profile: default
-    collector/grants:
-      - "GRANT SELECT,INSERT,ALTER,CREATE,DROP,SHOW ON otel.*"
-    grafana/networks/ip: 10.0.0.0/8
-    grafana/password: grafana
-    grafana/profile: readonly
-    # grafana/grants/query:
-    #   - "GRANT SETTING max_execution_time TO USER grafana"
   templates:
     podTemplates:
       - name: pod-template
