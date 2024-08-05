@@ -76,6 +76,10 @@ grafana:
   plugins:
     - grafana-clickhouse-datasource
     - vertamedia-clickhouse-datasource
+  dashboards:
+    default:
+      cluster-logs:
+        file: dashboards/cluster-logs.yaml
   datasources:
     datasources.yaml:
       apiVersion: 1
