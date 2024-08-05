@@ -60,6 +60,8 @@ spec:
   defaults:
     templates:
       podTemplate: pod-template
+      dataVolumeClaimTemplate: data-volume-template
+      logVolumeClaimTemplate: log-volume-template
   templates:
     podTemplates:
       - name: pod-template
@@ -77,3 +79,18 @@ spec:
             - name: bootstrap-configmap-volume
               configMap:
                 name: bootstrap-mounted-configmap
+    volumeClaimTemplates:
+      - name: data-volume-template
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 10Gi
+      - name: log-volume-template
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
