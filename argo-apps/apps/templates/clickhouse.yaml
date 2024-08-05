@@ -4,7 +4,6 @@ metadata:
   name: clickhouse
   namespace: argocd
 spec:
-  count: 0
   destination:
     namespace: clickhouse
     server: https://kubernetes.default.svc

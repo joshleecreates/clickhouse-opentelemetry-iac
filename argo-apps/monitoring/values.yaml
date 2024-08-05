@@ -25,6 +25,7 @@
 #### OpenTelemetry Collector #######################
 ####################################################
 opentelemetry-collector:
+  enabled: false
   image:
     repository: otel/opentelemetry-collector-contrib
 
