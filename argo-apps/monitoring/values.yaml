@@ -76,3 +76,42 @@ grafana:
   plugins:
     - grafana-clickhouse-datasource
     - vertamedia-clickhouse-datasource
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: ClickHouse-Grafana
+      uid: clusterclickhouse
+      type: grafana-clickhouse-datasource
+      jsonData:
+        defaultDatabase: otel
+        port: 9000
+        host: clickhouse-monitoringdb:9000
+        username: 'grafana'
+        tlsSkipVerify: true
+        logs:
+          otelEnabled: true
+          defaultDatabase: otel
+          defaultTable: otel_logs
+        traces:
+          otelEnabled: true
+          defaultDatabase: otel
+          defaultTable: otel_traces
+      secureJsonData:
+        password: 'grafana'
+    - name: ClickHouse-Altinity
+      uid: clickhouse-altinity
+      editable: true
+      access: proxy
+      type: vertamedia-clickhouse-datasource
+      url: clickhouse-monitoringdb:9000
+      jsonData:
+        defaultDatabase: otel
+        addCorsHeader: true
+        serverName: "clickhouse"
+        usePOST: true
+        useYandexCloudAuthorization: true
+        xHeaderUser: 'grafana'
+        tlsSkipVerify: true
+        dataSourceUrl: clickhouse-monitoringdb:9000
+      secureJsonData:
+        xHeaderKey: 'grafana'
