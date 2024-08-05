@@ -57,6 +57,9 @@ spec:
   configuration:
     clusters:
       - name: "monitoring"
+        layout:
+          shardsCount: 1
+          replicasCount: 1
   defaults:
     templates:
       podTemplate: pod-template
