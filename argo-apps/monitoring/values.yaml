@@ -61,7 +61,7 @@ opentelemetry-collector:
         # password: '${env:CLICKHOUSE_PASSWORD}'
         username: collector
         password: collector
-        create_schema: true
+        create_schema: false
         logs_table_name: otel_logs
         traces_table_name: otel_traces
         metrics_table_name: otel_metrics
