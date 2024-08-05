@@ -25,7 +25,6 @@
 #### OpenTelemetry Collector #######################
 ####################################################
 opentelemetry-collector:
-  enabled: false
   image:
     repository: otel/opentelemetry-collector-contrib
 
@@ -62,7 +61,7 @@ opentelemetry-collector:
         # password: '${env:CLICKHOUSE_PASSWORD}'
         username: collector
         password: collector
-        create_schema: false
+        create_schema: true
         logs_table_name: otel_logs
         traces_table_name: otel_traces
         metrics_table_name: otel_metrics
