@@ -16,7 +16,7 @@ data:
       CREATE USER IF NOT EXISTS collector IDENTIFIED BY 'collector' HOST IP '10.0.0.0/8';
       GRANT SELECT, INSERT, UPDATE, DROP, DELETE, ALTER, CREATE ON otel.* TO collector;
       GRANT CREATE DATABASE ON *.* TO collector;
-      CREATE USER IF NOT EXISTS grafana IDENTIFIED BY 'grafana' HOST IP 10.0.0.0/8';
+      CREATE USER IF NOT EXISTS grafana IDENTIFIED BY 'grafana' HOST IP '10.0.0.0/8';
       GRANT SELECT ON otel.* TO grafana;
     EOSQL
 ---
