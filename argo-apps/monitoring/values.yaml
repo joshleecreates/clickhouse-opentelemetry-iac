@@ -74,12 +74,8 @@ opentelemetry-collector:
           max_elapsed_time: 300s
     service:
       pipelines:
-        metrics:
-          exporters: []
         logs:
           exporters: [clickhouse]
-        traces:
-          exporters: []
 
 
 ####################################################
