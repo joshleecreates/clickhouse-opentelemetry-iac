@@ -66,7 +66,7 @@ opentelemetry-collector:
         traces_table_name: otel_traces
         metrics_table_name: otel_metrics
         timeout: 5s
-        cluster_name: dev
+        # cluster_name: dev
         retry_on_failure:
           enabled: true
           initial_interval: 5s
