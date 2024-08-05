@@ -14,8 +14,8 @@ spec:
       grafana/networks/ip: 10.0.0.0/8
       grafana/password: grafana
       grafana/profile: readonly
-      # grafana/grants/query:
-      #   - "GRANT SETTING max_execution_time TO"
+      grafana/grants/query:
+        - "GRANT SETTING max_execution_time TO USER grafana"
     profiles:
       readonly/readonly: 1
     clusters:
