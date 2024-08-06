@@ -87,10 +87,12 @@ grafana:
       editable: true
       options:
       path: /var/lib/grafana/dashboards/default
-  dashboards:
-    default:
-      cluster-logs:
-        file: dashboards/cluster-logs.json
+  dashboardsConfigMaps:
+    default: chmonitoring-grafana-dashboards
+  # dashboards:
+  #   default:
+  #     cluster-logs:
+  #       file: dashboards/cluster-logs.json
   datasources:
     datasources.yaml:
       apiVersion: 1
