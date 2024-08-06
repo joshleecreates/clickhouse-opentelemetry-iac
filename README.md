@@ -1,8 +1,10 @@
 # Clreate an EKS Cluster with ClickHouse
 
-## Install Infrastructure
+## Step 1: Create a Cluster
 
-In the `infrastructure` directory:
+In order to run the demo, you need a Kubernetes cluster. We can use the Altinity EKS Terraform Module for ClickHouse.
+
+In the `infrastructure` directory run:
 
 1. `tofu init` / `terraform init`
 2. `tofu apply`
@@ -12,14 +14,22 @@ This will take a few minutes to create an EKS cluster with two node groups.
 Once this completes, you will see a command to configure your local kubectl with
 the cluster context. If you need this command again you can fetch it with: `tofu output`
 
-## Bootstrap ArgoCD
+You can also bring your own Kubernetes cluster. The following steps assume that you have kubeconfig installed and configured to point to your desired cluster.
+
+## Step 2: Install ArgoCD
 
 In the `bootstrap` directory, run `terraform init` and `terraform apply`. This will
-use the terraform helm provider to create an ArgoCD release.
+use the Terraform Helm provider to create an ArgoCD release.
 
 The terraform outputs include the ArgoCD LoadBalancer URL and the initial admin password.
 
-You can see the unredacted password with `tofu outputs -json`.
+You can fetch the password again with:
+
+```
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+## Step 3: Install Apps with ArgoCD CLI
 
 ### Configuring the ArgoCD CLI
 
@@ -29,15 +39,17 @@ command `argocd login --core` (assuming your kube context is still active).
 Before using the CLI, you may wish to set your default namespace to `argocd`:
 
 ```
-$ kubectl config set-context --current --namespace=argocd
+kubectl config set-context --current --namespace=argocd
 ```
 
-To use our Kubernetes context to log in to ArgoCD:
+To use your Kubernetes context to log in to ArgoCD:
+
 ```
 argocd login --core
 ```
 
-To deploy our initial app-of-apps:
+To deploy the initial app-of-apps:
+
 ```
 argocd app create apps \
   --dest-namespace argocd \
@@ -46,83 +58,35 @@ argocd app create apps \
   --path argo-apps/apps
 ```
 
+Then we need to sync the app:
+
 ```
 argocd app sync argocd/apps
 ```
 
-## Create a Read-Only User for Grafana
+## Connect
 
-```
-kubectl -n monitoring exec -it chi-clickhouse-monitoring-0-0-0 -- clickhouse-client --user=test --password=password
-```
-
-```
-) CREATE USER 'grafana' HOST IP '10.0.0.0/8', '127.0.0.1/32' IDENTIFIED BY 'grafana'
-```
+#### Grafana
 
 Connect to Grafana:
+
 ```
 kubectl port-forward -n monitoring services/monitoring-grafana 3000:80
 ```
 
----
+You can then load Grafana in your browser at `http://locahost:3000` — there is no username or password.
 
-Once the cluster has been created, you can fetch the admin password using this command:
+#### ClickHouse
 
-
-And you can get the ingress address with:
-
-```
-kubectl get service -n clickhouse clickhouse-eks -o jsonpath="{.status.loadBalancer.ingress}"
-```
-
-# Deploy App-of-Apps with ArgoCD
-
-We'll use ArgoCD to deploy our app-of-apps chart, which is defined in `/argo-apps`.
-
-`kubectl config set-context --current --namespace=argocd`
+Connect to ClickHouse:
 
 ```
-argocd app create apps \
-    --dest-namespace argocd \
-    --dest-server https://kubernetes.default.svc \
-  --repo https://github.com/joshleecreates/clickhouse-opentelemetry-iac.git \
-  --path argo-apps
+kubectl exec -n monitoring -it chi-monitoringdb-monitoring-0-0-0 -- clickhouse-client
 ```
-
-```
-argocd app sync argocd/apps
-```
-
-We can use this command to get the ArgoCD admin password and watch our apps deploy:
-
-```
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
-```
-
-- get argocd server URL
-- configure argocd cli tool with kubernetes API access
-- port forwarding
-
-## Create Secrets
-
-### Configure Grafana
-
-#### Create a Grafana Admin User
-
-```
-kubectl create secret generic grafana-admin \
-  --from-literal=admin-user=YWRtaW4= \
-  --from-literal=admin-password=cGFzc3dvcmQ=
-```
-
-#### Create a READ-ONLY ClickHouse User
-
-#### Provide the Credentials to Grafana
-Create secrete 'grafana-env-secret'
 
 # Query Cheat Sheet
 
+(These queries require the metrics exporter which is not currently configured)
 #### Get all nodes
 
 ```
