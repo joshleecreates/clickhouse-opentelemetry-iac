@@ -79,7 +79,7 @@ grafana:
   dashboards:
     default:
       cluster-logs:
-        file: dashboards/cluster-logs.yaml
+        file: dashboards/cluster-logs.json
   datasources:
     datasources.yaml:
       apiVersion: 1
