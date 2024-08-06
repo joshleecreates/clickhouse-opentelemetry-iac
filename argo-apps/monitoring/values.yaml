@@ -76,6 +76,17 @@ grafana:
   plugins:
     - grafana-clickhouse-datasource
     - vertamedia-clickhouse-datasource
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: file
+      disableDeletion: false
+      editable: true
+      options:
+      path: /var/lib/grafana/dashboards/default
   dashboards:
     default:
       cluster-logs:
