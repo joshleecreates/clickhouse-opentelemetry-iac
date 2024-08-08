@@ -1,8 +1,12 @@
 # Clreate an EKS Cluster with ClickHouse®
 
+## Legal
+
+Altinity®, Altinity.Cloud®, and Altinity Stable® are registered trademarks of Altinity, Inc. ClickHouse® is a registered trademark of ClickHouse, Inc.; Altinity is not affiliated with or associated with ClickHouse, Inc.
+
 ## Step 1: Create a Cluster
 
-In order to run the demo, you need a Kubernetes cluster. We can use the Altinity EKS Terraform Module for ClickHouse.
+In order to run the demo, you need a Kubernetes cluster with dynamic storage provisioning and the ability to create LoadBalancers. We can use the Altinity EKS Terraform Module for ClickHouse.
 
 In the `infrastructure` directory run:
 
@@ -122,3 +126,5 @@ FROM otel.otel_metrics_sum
 WHERE "MetricName"='k8s.pod.cpu.time' 
 	AND ResourceAttributes['k8s.pod.uid'] IS NOT NULL;
 ```
+
+
