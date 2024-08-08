@@ -58,13 +58,15 @@ spec:
     volumeClaimTemplates:
       - name: data-volume-template
         spec:
+          storageClassName: local-path
           accessModes:
             - ReadWriteOnce
           resources:
             requests:
-              storage: 10Gi
+              storage: 1Gi
       - name: log-volume-template
         spec:
+          storageClassName: local-path
           accessModes:
             - ReadWriteOnce
           resources:
