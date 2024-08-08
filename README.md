@@ -1,4 +1,4 @@
-# Clreate an EKS Cluster with ClickHouse
+# Clreate an EKS Cluster with ClickHouse®
 
 ## Step 1: Create a Cluster
 
