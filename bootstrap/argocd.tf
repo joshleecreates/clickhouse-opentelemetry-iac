@@ -20,12 +20,6 @@ resource "helm_release" "argocd" {
   chart      = "argo-cd"
   namespace  = kubernetes_namespace.argocd.metadata.0.name
   version    = "5.27.0" # Update this to the desired version
-
-  # Additional configuration values
-  set {
-    name  = "server.service.type"
-    value = "LoadBalancer"
-  }
 }
 
 data "kubernetes_secret" "argocd_secret" {
@@ -47,8 +41,4 @@ data "kubernetes_service" "argocd-server" {
 output "argocd_password" {
   value     = data.kubernetes_secret.argocd_secret.data["password"]
   sensitive = true
-}
-
-output "argocd_lb_url" {
-  value = data.kubernetes_service.argocd-server.status.0.load_balancer.0.ingress.0.hostname
 }
