@@ -1,0 +1,79 @@
+# ClickHouse using default storage class.
+apiVersion: "clickhouse.altinity.com/v1"
+kind: "ClickHouseInstallation"
+metadata:
+  name: "{{ .Values.clickhouse.name }}"
+spec:
+  defaults:
+    templates:
+      serviceTemplate: {{ default "default" .Values.clickhouse.cluster.templates.serviceTemplate }} 
+      podTemplate: {{ default "default" .Values.clickhouse.cluster.templates.podTemplate }}
+      {{- if .Values.clickhouse.storage.enabled }} 
+      volumeClaimTemplate: {{ default "default" .Values.clickhouse.cluster.templates.volumeClaimTemplate }}
+      {{- end }}
+  configuration:
+    users:
+      {{- range .Values.clickhouse.users }}
+      {{ .name }}/networks/ip: {{ .hostIP }}
+      {{- if .accessManagement }}
+      {{ .name }}/access_management: 1
+      {{- end }}
+      {{ .name }}/password:
+        valueFrom:
+          secretKeyRef:
+            name: clickhouse-credentials-{{ .name }}
+            key: password
+      {{- end }}
+    clusters:
+      - name: "{{ .Values.clickhouse.cluster.name }}"
+        layout: {{ .Values.clickhouse.cluster.layout }}
+    {{- if .Values.keeper.enabled }}
+    zookeeper:
+      nodes:
+        - host: keeper-"{{ .Values.keeper.name }}"
+          port: 2181
+    {{- end }}
+  templates:
+    podTemplates:
+      - name: default
+        spec:
+          containers:
+          - name: clickhouse
+            image: {{ .Values.clickhouse.pod.image }}
+          {{- if .Values.clickhouse.pod.nodeSelector }}
+          nodeSelector: {{ .Values.clickhouse.pod.nodeSelector }}
+          {{- end }}
+      {{- if .Values.clickhouse.additionalPodTemplates }}
+      {{ .Values.clickhouse.additionalPodTemplates }}
+      {{- end }}
+    volumeClaimTemplates:
+      {{- if .Values.clickhouse.storage.enabled }} 
+      - name: default
+        reclaimPolicy: Retain
+        spec:
+          {{- if .Values.clickhouse.storage.storageClassName }}
+          storageClassName: "{{ .Values.clickhouse.storage.storageClassName }}"
+          {{- end }}
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: "{{ .Values.clickhouse.storage.size }}"
+      {{- end }}
+      {{- if .Values.clickhouse.additionalVolumeClaimTemplates }}
+      {{ .Values.clickhouse.additionalVolumeClaimTemplates }}
+      {{- end }}
+    serviceTemplates:
+      - name: default
+        spec:
+          type: {{ .Values.clickhouse.service.type }}
+          ports:
+            - name: http
+              port: 8123
+              targetPort: 8123
+            - name: tcp
+              port: 9000
+              targetPort: 9000
+      {{- if .Values.clickhouse.additionalServiceTemplates }}
+      {{ .Values.clickhouse.additionalServiceTemplates }}
+      {{- end }}

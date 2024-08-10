@@ -4,11 +4,3 @@ description: Deploys a ClickHouse Cluster with the Altinity Operator
 type: application
 version: 0.1.0
 appVersion: "1.0"
-
-dependencies:
-- name: keeper-sts
-  version: "0.1.1"
-  repository:  https://altinity.github.io/kubernetes-blueprints-for-clickhouse
-- name: clickhouse-eks
-  version: "0.1.2"
-  repository:  https://altinity.github.io/kubernetes-blueprints-for-clickhouse
