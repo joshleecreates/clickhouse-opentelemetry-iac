@@ -58,7 +58,7 @@ spec:
     volumeClaimTemplates:
       - name: data-volume-template
         spec:
-          storageClassName: default
+          storageClassName: gp2
           accessModes:
             - ReadWriteOnce
           resources:
