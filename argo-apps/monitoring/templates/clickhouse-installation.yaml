@@ -66,6 +66,7 @@ spec:
               storage: 1Gi
       - name: log-volume-template
         spec:
+          storageClassName: gp2
           accessModes:
             - ReadWriteOnce
           resources:
