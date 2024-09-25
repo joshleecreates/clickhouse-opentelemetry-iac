@@ -17,6 +17,7 @@ opentelemetry-collector:
     # Enables the filelogreceiver and adds it to the logs pipelines
     logsCollection:
       enabled: true
+      includeCollectorLogs: true
 
   extraEnvs:
     # - name: CLICKHOUSE_USERNAME
@@ -30,6 +31,9 @@ opentelemetry-collector:
     #       name: clickhouse-credentials
     #       key: password
   config:
+    receivers:
+      kubeletstats:
+        auth_type: "none"
     exporters:
       clickhouse:
         endpoint: clickhouse://clickhouse-monitoringdb:9000?dial_timeout=10s&compress=lz4

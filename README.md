@@ -78,6 +78,10 @@ Connect to Grafana:
 kubectl port-forward -n monitoring services/monitoring-grafana 3000:80
 ```
 
+```
+kubectl port-forward -n argocd services/argocd-server 3001:80
+```
+
 You can then load Grafana in your browser at `http://locahost:3000` — there is no username or password.
 
 #### ClickHouse
