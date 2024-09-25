@@ -1,26 +1,26 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: coroot
-#   namespace: argocd
-# spec:
-#   destination:
-#     namespace: coroot
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     path: argo-apps/coroot
-#     repoURL: {{ .Values.spec.source.repoURL }}
-#     targetRevision: {{ .Values.spec.source.targetRevision }}
-#   syncPolicy:
-#     automated:
-#       selfHeal: true
-#       prune: true
-#
-# ---
-# apiVersion: v1
-# kind: Namespace
-# metadata:
-#   labels:
-#     kubernetes.io/metadata.name: coroot
-#   name: coroot
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: coroot
+  namespace: argocd
+spec:
+  destination:
+    namespace: coroot
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: argo-apps/coroot
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    kubernetes.io/metadata.name: coroot
+  name: coroot
