@@ -1,41 +1,19 @@
-clickhouse:
-  name: my-installation
-  cluster: 
-    name: my-cluster
-    layout:
-      shardCount: 1
-      replicaCount: 3
-      #todo: option for replica-per-zone
-    templates:
-      podTemplate: ""
-      volumeClaimTemplate: ""
-      serviceTemplate: ""
-  users:
-    - name: default
-      accessManagement: true #should this be "1"?
-      password: ""
-      hostIP: 0.0.0.0/0
-      #todo: grants
-  #todo: initial databases
-  #pods: only if default template is used
-  pod: 
-    image: "altinity/clickhouse-server:23.8.8.21.altinitystable"
-    nodeSelector: ""
-      # node.kubernetes.io/instance-type: "m6i.large"
-  # only with default service template
-  service:
-    type: "ClusterIP"
-  # only with default vc template
-  storage: 
-    enabled: true
-    storageClassName: ""
-    size: 5Gi
-    #todo: logs volume
-  # user-defined templates
-  additionalPodTemplates:
-  additionalServiceTemplates:
-  additionalVolumeClaimTemplates:
-keeper:
-  enabled: true
-  name: keeper #would be nice to sync this automatically
-  #todo: options for built-in keeper
+clickhouse-eks:
+  all:
+    metadata:
+      labels:
+        application_group: eks
+
+  clickhouse:
+    name: eks
+    cluster: dev 
+    zones:
+      - us-west-2a
+      - us-west-2b
+      - us-west-2c
+    node_selector: "m6i.large"
+    service_type: "ClusterIP"
+    storage_class_name: gp3-encrypted
+    password: password
+    user: test
+    keeper_name: keeper-keeper
