@@ -7,7 +7,7 @@ appVersion: "1.0"
 
 dependencies:
 - name: opentelemetry-collector
-  version: "0.110.0"
+  version: "0.106.1"
   repository: https://open-telemetry.github.io/opentelemetry-helm-charts/
 - name: grafana
   version: "8.4.0"
