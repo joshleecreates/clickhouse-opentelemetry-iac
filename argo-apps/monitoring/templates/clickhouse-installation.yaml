@@ -63,7 +63,7 @@ spec:
             - ReadWriteOnce
           resources:
             requests:
-              storage: 1Gi
+              storage: 10Gi
       - name: log-volume-template
         spec:
           storageClassName: gp2
