@@ -72,12 +72,8 @@ opentelemetry-collector:
     service:
       pipelines:
         logs:
-          receivers: [filelog]
-          processors: []
           exporters: [clickhouse]
         metrics:
-          receivers: [kubeletstats]
-          processors: []
           exporters: [clickhouse]
 
 ####################################################
