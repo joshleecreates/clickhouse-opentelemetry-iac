@@ -70,8 +70,6 @@ opentelemetry-collector:
       clickhouse:
         endpoint: clickhouse://clickhouse-monitoringdb:9000?dial_timeout=10s&compress=lz4
         database: otel
-        # username: '${env:CLICKHOUSE_USERNAME}'
-        # password: '${env:CLICKHOUSE_PASSWORD}'
         username: collector
         password: collector
         create_schema: true
@@ -79,7 +77,6 @@ opentelemetry-collector:
         traces_table_name: otel_traces
         metrics_table_name: otel_metrics
         timeout: 5s
-        # cluster_name: dev
         retry_on_failure:
           enabled: true
           initial_interval: 5s
@@ -88,11 +85,9 @@ opentelemetry-collector:
     service:
       pipelines:
         logs:
-          exporters: [debug, clickhouse]
-        metrics:
-          exporters: [debug, clickhouse]
-        traces:
-          exporters: [debug, clickhouse]
+          receivers: [kubeletstats, filelog]
+          processors: [batch, memory_limiter]
+          exporters: [clickhouse]
 
 ####################################################
 # Grafana
