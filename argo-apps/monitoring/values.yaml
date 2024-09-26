@@ -51,52 +51,6 @@ opentelemetry-collector:
             type: json_parser
             parse_from: body
 
-          # Handle SeverityNumber and SeverityText for JSON logs (if present)
-          - type: router
-            id: json_severity_router
-            field: level
-            routes:
-              - value: "INFO"
-                output: 9
-              - value: "WARN"
-                output: 13
-              - value: "ERROR"
-                output: 17
-              - value: "FATAL"
-                output: 21
-
-          # Route for plain text logs with the log level prefix
-          - id: text_route
-            type: regex_parser
-            regex: '^(?P<log_level>[IWEF])(?P<date>\d{4}) (?P<time>\d{2}:\d{2}:\d{2}\.\d{6}) (?P<process_id>\d+) (?P<file>[^]]+)\] (?P<log>.*)$'
-
-          # Move the log level into a 'severity' field
-          - type: move
-            from: log_level
-            to: severity
-            include: text_route
-
-          # Convert the log level to the appropriate severity text
-          - type: router
-            id: severity_router
-            field: severity
-            routes:
-              - value: "I"
-                output: "INFO"
-              - value: "W"
-                output: "WARN"
-              - value: "E"
-                output: "ERROR"
-              - value: "F"
-                output: "FATAL"
-            include: text_route
-
-          # Clean up the prefix for text logs
-          - type: regex
-            regex: '^[A-Z]\d{4} \d{2}:\d{2}:\d{2}\.\d{6} \d+ [^]]+\] '
-            expr: log
-            replace: ''
-            include: text_route
     exporters:
       clickhouse:
         endpoint: clickhouse://clickhouse-monitoringdb:9000?dial_timeout=10s&compress=lz4
