@@ -19,17 +19,6 @@ opentelemetry-collector:
       enabled: true
       includeCollectorLogs: true
 
-  extraEnvs:
-    # - name: CLICKHOUSE_USERNAME
-    #   valueFrom:
-    #     secretKeyRef:
-    #       name: clickhouse-credentials
-    #       key: user
-    # - name: CLICKHOUSE_PASSWORD
-    #   valueFrom:
-    #     secretKeyRef:
-    #       name: clickhouse-credentials
-    #       key: password
   config:
     receivers:
       kubeletstats:
@@ -51,10 +40,8 @@ opentelemetry-collector:
             parse_from: body
           - id: regex_route
             type: regex_parser
-            regex: '(?P<time>\d{4}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2}\.\d{6}) \[ (?P<thread_id>\d+) \] \{(?P<query_id>[a-f0-9-]+)\} <(?P<log_level>\w+)> (?P<component>\w+): (?P<message>.+)'
+            regex: '(?P<timestamp>\d{4}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2}\.\d{6}) \[ (?P<thread_id>\d+) \] \{(?P<query_id>[a-f0-9-]+)\} <(?P<log_level>\w+)> (?P<component>\w+): (?P<message>.+)'
             timestamp:
-              parse_from: time
-              layout_type: strptime
               layout: '%Y.%m.%d %H:%M:%S.%f'
             resource_attributes:
               - key: log.thread_id
@@ -86,8 +73,12 @@ opentelemetry-collector:
     service:
       pipelines:
         logs:
-          receivers: [kubeletstats, filelog]
-          processors: [batch, memory_limiter]
+          receivers: [filelog]
+          processors: []
+          exporters: [clickhouse]
+        metrics:
+          receivers: [kubeletstats]
+          processors: []
           exporters: [clickhouse]
 
 ####################################################
