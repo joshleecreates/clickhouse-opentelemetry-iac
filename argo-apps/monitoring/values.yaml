@@ -34,6 +34,12 @@ opentelemetry-collector:
     receivers:
       kubeletstats:
         auth_type: "none"
+      filelog:
+        operators:
+          - type: regex
+            regex: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\s*'
+            expr: log
+            replace: ''
     exporters:
       clickhouse:
         endpoint: clickhouse://clickhouse-monitoringdb:9000?dial_timeout=10s&compress=lz4
@@ -56,8 +62,11 @@ opentelemetry-collector:
     service:
       pipelines:
         logs:
-          exporters: [clickhouse]
-
+          exporters: [debug, clickhouse]
+        metrics:
+          exporters: [debug, clickhouse]
+        traces:
+          exporters: [debug, clickhouse]
 
 ####################################################
 # Grafana
