@@ -57,31 +57,13 @@ opentelemetry-collector:
             field: level
             routes:
               - value: "INFO"
-                output: json_severity_info
+                output: 9
               - value: "WARN"
-                output: json_severity_warn
+                output: 13
               - value: "ERROR"
-                output: json_severity_error
+                output: 17
               - value: "FATAL"
-                output: json_severity_fatal
-
-          # Add SeverityNumber for JSON logs
-          - id: json_severity_info
-            type: set
-            field: severity_number
-            value: 9  # INFO
-          - id: json_severity_warn
-            type: set
-            field: severity_number
-            value: 13  # WARN
-          - id: json_severity_error
-            type: set
-            field: severity_number
-            value: 17  # ERROR
-          - id: json_severity_fatal
-            type: set
-            field: severity_number
-            value: 21  # FATAL
+                output: 21
 
           # Route for plain text logs with the log level prefix
           - id: text_route
@@ -108,38 +90,6 @@ opentelemetry-collector:
               - value: "F"
                 output: "FATAL"
             include: text_route
-
-          # Set SeverityNumber for plain text logs
-          - type: router
-            id: severity_number_router
-            field: severity
-            routes:
-              - value: "INFO"
-                output: severity_number_info
-              - value: "WARN"
-                output: severity_number_warn
-              - value: "ERROR"
-                output: severity_number_error
-              - value: "FATAL"
-                output: severity_number_fatal
-            include: text_route
-
-          - id: severity_number_info
-            type: set
-            field: severity_number
-            value: 9  # INFO
-          - id: severity_number_warn
-            type: set
-            field: severity_number
-            value: 13  # WARN
-          - id: severity_number_error
-            type: set
-            field: severity_number
-            value: 17  # ERROR
-          - id: severity_number_fatal
-            type: set
-            field: severity_number
-            value: 21  # FATAL
 
           # Clean up the prefix for text logs
           - type: regex
