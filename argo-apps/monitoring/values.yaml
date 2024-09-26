@@ -42,8 +42,6 @@ opentelemetry-collector:
             type: regex_parser
             regex: '(?P<time>\d{4}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2}\.\d{6}) \[ (?P<thread_id>\d+) \] \{(?P<query_id>[a-f0-9-]+)\} <(?P<log_level>\w+)> (?P<component>\w+): (?P<message>.+)'
             parse_from: body
-            timestamp:
-              layout: '%Y.%m.%d %H:%M:%S.%f'
             resource_attributes:
               - key: log.thread_id
                 from: thread_id
