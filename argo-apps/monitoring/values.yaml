@@ -43,14 +43,11 @@ opentelemetry-collector:
             routes:
               - value: '{'
                 output: json_route
-              - value: "^[A-Z]"  # Starts with a log level prefix
-                output: text_route
 
           # Route for JSON formatted logs
           - id: json_route
             type: json_parser
             parse_from: body
-
     exporters:
       clickhouse:
         endpoint: clickhouse://clickhouse-monitoringdb:9000?dial_timeout=10s&compress=lz4
