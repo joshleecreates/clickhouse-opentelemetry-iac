@@ -26,33 +26,8 @@ opentelemetry-collector:
       filelog:
         operators:
           # Route based on whether the log is JSON or plain text
-          - type: router
-            id: log_type_router
-            field: body  # Assuming logs are in the 'body' field
-            routes:
-              - expr: 'body matches "^\\{"'
-                output: json_route
-              - expr: 'true'
-                output: regex_route
-          # Route for JSON formatted logs
-          - id: json_route
-            type: json_parser
-            parse_from: body
-          - id: regex_route
-            type: regex_parser
-            regex: '(?P<time>\d{4}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2}\.\d{6}) \[ (?P<thread_id>\d+) \] \{(?P<query_id>[a-f0-9-]+)\} <(?P<log_level>\w+)> (?P<component>\w+): (?P<message>.+)'
-            parse_from: body
-            resource_attributes:
-              - key: log.thread_id
-                from: thread_id
-              - key: log.query_id
-                from: query_id
-              - key: log.level
-                from: log_level
-              - key: log.component
-                from: component
-              - key: log.message
-                from: message
+          - id: container-parser
+            type: container
     exporters:
       clickhouse:
         endpoint: clickhouse://clickhouse-monitoringdb:9000?dial_timeout=10s&compress=lz4
