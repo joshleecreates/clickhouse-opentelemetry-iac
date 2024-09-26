@@ -30,6 +30,7 @@ opentelemetry-collector:
             type: container
           - id: regex_route
             type: regex_parser
+            parse_from: body
             regex: '(?P<time>\d{4}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2}\.\d{6}) \[ (?P<thread_id>\d+) \] \{(?P<query_id>[a-f0-9-]+)\} <(?P<log_level>\w+)> (?P<component>\w+): (?P<message>.+)'
             resource_attributes:
               - key: log.thread_id
