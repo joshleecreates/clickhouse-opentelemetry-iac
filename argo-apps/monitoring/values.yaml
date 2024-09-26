@@ -51,9 +51,9 @@ opentelemetry-collector:
             parse_from: body
           - id: regex_route
             type: regex_parser
-            regex: '(?P<timestamp>\d{4}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2}\.\d{6}) \[ (?P<thread_id>\d+) \] \{(?P<query_id>[a-f0-9-]+)\} <(?P<log_level>\w+)> (?P<component>\w+): (?P<message>.+)'
+            regex: '(?P<time>\d{4}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2}\.\d{6}) \[ (?P<thread_id>\d+) \] \{(?P<query_id>[a-f0-9-]+)\} <(?P<log_level>\w+)> (?P<component>\w+): (?P<message>.+)'
             timestamp:
-              parse_from: timestamp
+              parse_from: time
               layout_type: strptime
               layout: '%Y.%m.%d %H:%M:%S.%f'
             resource_attributes:
