@@ -102,6 +102,15 @@ SELECT DISTINCT ResourceAttributes['k8s.node.name'] AS distinct_values
 	FROM otel.otel_metrics_sum
 	WHERE "MetricName"='k8s.node.cpu.time' 
 	AND ResourceAttributes['k8s.node.name'] IS NOT NULL;
+
+SELECT DISTINCT ResourceAttributes['k8s.node.name'] AS distinct_values
+FROM otel.otel_logs
+WHERE (ResourceAttributes['k8s.node.name']) IS NOT NULL
+
+SELECT DISTINCT ResourceAttributes['k8s.pod.name'] AS distinct_values
+FROM otel.otel_logs
+WHERE (ResourceAttributes['k8s.pod.name']) IS NOT NULL
+
 ```
 
 #### Get all pods (with node name)

@@ -1,26 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: monitoring
+  name: qryn
   namespace: argocd
 spec:
   destination:
-    namespace: monitoring
+    namespace: qryn
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: argo-apps/monitoring
+    path: argo-apps/qryn
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
   syncPolicy:
     automated:
-      selfHeal: false
-      prune: false
+      selfHeal: true
+      prune: true
 
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   labels:
-    kubernetes.io/metadata.name: monitoring
-  name: monitoring
+    kubernetes.io/metadata.name: qryn
+  name: qryn
