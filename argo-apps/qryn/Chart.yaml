@@ -6,7 +6,7 @@ version: 0.1.0
 appVersion: "1.0"
 
 dependencies:
-- name: qryn
+- name: qryn-helm
   version: "0.1.2"
   repository: https://metrico.github.io/qryn-helm/
 
