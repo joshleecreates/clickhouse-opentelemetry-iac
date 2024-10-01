@@ -58,7 +58,6 @@ spec:
     volumeClaimTemplates:
       - name: data-volume-template
         spec:
-          storageClassName: default
           accessModes:
             - ReadWriteOnce
           resources:
@@ -66,7 +65,6 @@ spec:
               storage: 10Gi
       - name: log-volume-template
         spec:
-          storageClassName: default
           accessModes:
             - ReadWriteOnce
           resources:
