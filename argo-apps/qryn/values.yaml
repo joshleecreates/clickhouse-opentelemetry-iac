@@ -1,4 +1,5 @@
 qryn-helm:
-  env:
-    CLICKHOUSE_SERVER: clickhouse-monitoringdb.monitoring.svc.cluster.local
-    CLICKHOUSE_AUTH: collector:collector
+  containers:
+    env:
+      CLICKHOUSE_SERVER: clickhouse-monitoringdb.monitoring.svc.cluster.local
+      CLICKHOUSE_AUTH: collector:collector
