@@ -23,4 +23,5 @@ kind: Namespace
 metadata:
   labels:
     kubernetes.io/metadata.name: coroot
+    pod-security.kubernetes.io/enforce: privileged
   name: coroot

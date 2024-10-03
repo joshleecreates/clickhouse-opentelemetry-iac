@@ -1,11 +1,14 @@
 apiVersion: v2
 name: coroot
-description: Deploys a coroot
+description: Deploys coroot
 type: application
 version: 0.1.0
 appVersion: "1.0"
 
 dependencies:
+- name: node-agent
+  version: "0.1.94"
+  repository:  https://coroot.github.io/helm-charts
 - name: coroot
   version: "0.14.2"
   repository:  https://coroot.github.io/helm-charts
