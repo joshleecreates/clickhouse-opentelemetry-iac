@@ -12,3 +12,6 @@ dependencies:
 - name: grafana
   version: "8.4.0"
   repository: https://grafana.github.io/helm-charts
+- name: opentelemetry-demo
+  version: "0.32.8"
+  repository: https://open-telemetry.github.io/opentelemetry-helm-charts/
