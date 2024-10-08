@@ -1,0 +1,12 @@
+apiVersion: v2
+name: cognative
+description: Deploys Cognative
+type: application
+version: 0.1.0
+appVersion: "1.0"
+
+dependencies:
+- name: cognative
+  version: "0.2403.3"
+  repository: https://mya.sh
+

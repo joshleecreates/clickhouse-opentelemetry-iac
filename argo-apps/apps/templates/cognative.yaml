@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cognative
+  namespace: argocd
+spec:
+  destination:
+    namespace: cognative
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: argo-apps/cognative
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    kubernetes.io/metadata.name: cognative
+    pod-security.kubernetes.io/enforce: privileged
+  name: cognative
